@@ -1,0 +1,20 @@
+{
+    "dev": {
+        "awscloudformation": {
+            "AuthRoleName": "amplify-slingshot-app-dev-111047-authRole",
+            "UnauthRoleArn": "arn:aws:iam::198534139669:role/amplify-slingshot-app-dev-111047-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::198534139669:role/amplify-slingshot-app-dev-111047-authRole",
+            "Region": "eu-west-2",
+            "DeploymentBucketName": "amplify-slingshot-app-dev-111047-deployment",
+            "UnauthRoleName": "amplify-slingshot-app-dev-111047-unauthRole",
+            "StackName": "amplify-slingshot-app-dev-111047",
+            "StackId": "arn:aws:cloudformation:eu-west-2:198534139669:stack/amplify-slingshot-app-dev-111047/72aec840-6f52-11ea-8dba-021679f87d94",
+            "AmplifyAppId": "d22h9jqtevybvj"
+        },
+        "categories": {
+            "auth": {
+                "slingshotapp562ae0af": {}
+            }
+        }
+    }
+}
