@@ -11,9 +11,12 @@
     "@testing-library/user-event": "^7.2.1",
     "aws-amplify": "^2.2.7",
     "aws-amplify-react": "^3.1.8",
+    "d3": "^5.15.0",
     "react": "^16.13.1",
+    "react-d3-graph": "^2.4.0",
     "react-dom": "^16.13.1",
-    "react-scripts": "3.4.1"
+    "react-scripts": "3.4.1",
+    "styled-components": "^5.0.1"
   },
   "scripts": {
     "start": "react-scripts start",

@@ -4,7 +4,7 @@ import { Container, Button, FormGroup, Switch, FormControlLabel, Box, Paper, Gri
 
 const useStyles = makeStyles(theme => ({
   root: {
-    background: 'lightgrey',
+    background: 'lightblue',
     border: 0,
     borderRadius: 3,
     color: 'white',
@@ -21,7 +21,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const Graph = (props) => {
+const EquationEditing = (props) => {
   //state management
   const [checked, setChecked] = React.useState(true);
 
@@ -34,10 +34,18 @@ const Graph = (props) => {
   const classes = useStyles();
   return (
       <Box className={classes.root}>
+      Equation Component <br></br>
+      <math>
+        <mi>x</mi>
+        <mo>+</mo>
+        <mn>5</mn>
+        <mo>=</mo>
+        <mn>0</mn>
+      </math>
       <Button className={classes.button}>click me!</Button>
       <Switch checked={checked} onClick={toggleChecked} />
       </Box>
   );
 };
 
-export default Graph;
+export default EquationEditing;

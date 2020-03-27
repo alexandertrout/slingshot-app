@@ -5,7 +5,9 @@ import Amplify from 'aws-amplify';
 import awsconfig from './aws-exports';
 import { withAuthenticator } from 'aws-amplify-react';
 import './App.css';
-import Graph from './Components/Graph';
+import Graph2 from './Components/Graph2';
+import EquationEditing from './Components/EquationEditingRCC';
+import MachineLearning from "./Components/MachineLearning";
 import { Container, Button, FormGroup, Switch, FormControlLabel, Box, Paper, Grid } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
@@ -54,28 +56,25 @@ function App() {
     <div className="App">
       {/* <Container className={classes.root}> */}
         <Box className={classes.root}>
-
         <h1>Welcome To Your Dashboard</h1>
 
         <Grid container spacing={3}>
           <Grid item xs={12}>
             <Paper className={classes.paper}>
-               Insert a Graph Here
-               <Graph/>
+               {/* Insert a Graph Here */}
+               <Graph2/>
             </Paper>
           </Grid>
           <Grid item xs={6}>
             <Paper className={classes.paper}> 
               Insert Equation Editing Here
-              <Switch checked={checked} onClick={toggleChecked} /> 
-              <Button className={classes.button}>click me!</Button> 
+              <EquationEditing/>
             </Paper>
           </Grid>
           <Grid item xs={6}>
             <Paper className={classes.paper}>
               Insert Machine Learning Here
-              <Switch checked={checked} onClick={toggleChecked} />
-              <Button className={classes.button}>click me!</Button> 
+              <MachineLearning/>
             </Paper>
           </Grid>
         </Grid>
