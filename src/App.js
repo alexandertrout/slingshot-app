@@ -35,7 +35,7 @@ const useStyles = makeStyles(theme => ({
     textAlign: 'center',
     color: theme.palette.text.secondary,
     margin: 0,
-    height: 400,
+    height: 500,
   },
 }));
 
@@ -67,7 +67,6 @@ function App() {
           </Grid>
           <Grid item xs={6}>
             <Paper className={classes.paper}> 
-              Insert Equation Editing Here
               <EquationEditing/>
             </Paper>
           </Grid>

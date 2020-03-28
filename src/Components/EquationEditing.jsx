@@ -15,8 +15,8 @@ class EquationEditingRCC extends Component {
     // submitted: false,
     math: math,
     chartData: {
-      // labels: [1, 2, 3,
-      //      4, 5],
+      labels: [1, 2, 3,
+           4, 5],
   datasets: [{
       fill: false,
       showLine: true,
@@ -97,6 +97,14 @@ class EquationEditingRCC extends Component {
         }
       })
       let newMath = currentState.math.substring(0, 68) + inputMath.join('') +'</math>'
+      console.log(newMath, "New Math Here");
+      if (/<msup>/.test(newMath)) {
+        console.log('quadratic')
+        this.updateQuadGraph();
+      } else {
+        this.updateGraph();
+        console.log('linear')
+      }
       return {math: newMath}
     });
   }
@@ -131,20 +139,102 @@ class EquationEditingRCC extends Component {
   this.setState({chartData});
   }
 
+  updateQuadGraph = () => {
+   let equation = this.state.input.substring(4);
+   let groups = equation.split(' ');
+   let powerSection = groups[0];
+   let firstOp = groups[1];
+   groups.shift();
+   groups.shift();
+   let end = groups.join(' ');
+
+   let info = {
+     powerSection,
+     firstOp,
+     end
+   }
+  
+
+//powersection 
+let startLocation = null;
+let start = powerSection.split('');
+    start.forEach((char, index) => {
+        if (char === 'x'){
+          startLocation = index;
+        }
+    });
+    
+let prefix = 1;
+    if (startLocation !== 0){
+    prefix = parseInt(powerSection.substring(0, startLocation)); 
+    }
+
+    let yVals = [];
+    this.state.chartData.datasets[0].data.forEach(point => {
+    console.log(point.x)
+    let power = Math.pow(point.x, powerSection.substring(startLocation+2))
+    let finalStart = prefix * power;
+// firstOp - deal with this after using eval.
+// end section
+   let endLocation = null;
+   let endChars = end.split('');
+      endChars.forEach((char, index) => {
+        if (char === 'x'){
+          endLocation = index;
+        }
+    });
+    let finalEnd = end.substring(0, endLocation) * point.x + eval(end.substring(endLocation+1));
+    let a = finalStart.toString();
+    console.log(a, " <- a")
+    let b = finalEnd.toString();
+    console.log(b, " <- b")
+    let y = eval(a + firstOp + b);
+
+    console.log(y);
+    yVals.push(y);
+    })
+
+    console.log(yVals);
+
+
+  let newData = this.state.chartData.datasets[0].data.map((point, index) => {
+      point.y = yVals[index];
+      return point
+  })
+
+  let chartData = {...this.state.chartData};
+  chartData.datasets[0].data = newData;
+
+  this.setState({chartData});
+  }
+
   render() {
     console.log(this.state.chartData)
     return (
       <>
       <form onSubmit={this.submit}>
+      <p>Spacing is important, accepts equations in the forms;<br></br> y = mx + c <br/> y = ax^n + bx + c </p>
+      {/* <p>y = mx + c</p>
+      <p>y = ax^n + bx + c</p> */}
        <input type="text" value={this.state.input} onChange={this.updateInput}/>
+       <button>Convert</button>
      </form>
     <MathJax math={this.state.math}/>
-    <button onClick={this.updateGraph}>Update Linear Graph</button>
-    <button onClick={this.updateQuadGraph}>Update Quadratic Graph</button>
     <div>
     < Scatter
           data={this.state.chartData}
-          options={{maintainAspectRatio: false, showLine: true, animation: {duration: 0}}}
+          options={{maintainAspectRatio: false, showLine: true, animation: {duration: 0}, scales: {
+      yAxes: [{
+          ticks: {
+              beginAtZero:true
+          }
+        }],
+        xAxes: [{
+          ticks: {
+              beginAtZero:true  
+          }
+        }]
+     }}}
           height={300}
           width={350}
           redraw={true}

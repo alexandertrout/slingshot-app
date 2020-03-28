@@ -27,3 +27,26 @@ text {
   height: 30px;
   z-index: 999; */
 }
+
+form {
+  display: flex;
+  flex-direction: column;
+  margin: 0px;
+}
+
+input {
+  padding: 2px;
+  font-size: 20px;
+  color:black;
+}
+
+button {
+  margin: 10px 0px;
+  font-size: 20px;
+  background-color: black;
+  border: 0;
+  border-radius: 3px;
+  box-shadow: 0 1px 1px 1px grey;
+  color: white;
+  padding: 0 30px;
+}
