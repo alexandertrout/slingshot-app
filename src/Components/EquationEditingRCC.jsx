@@ -75,8 +75,14 @@ class EquationEditingRCC extends Component {
       inputChars.forEach((char, index) => {
       if (/[0-9]/.test(char)) {
         if (/[0-9]/.test(inputChars[index-1])){
+          const nums = [];
+          for (let i = 10; i > 1; i--){
+           if (/[0-9]/.test(inputChars[index-i])){ 
+            nums.push(inputChars[index-i]);
+           }
+          }
           inputMath.pop();
-          inputMath.push(`<mi>${inputChars[index-1]}${char}</mi>`)
+          inputMath.push(`<mi>${nums.join('')}${inputChars[index-1]}${char}</mi>`)
         } else {
           inputMath.push(`<mi>${char}</mi>`)
         }
@@ -86,15 +92,19 @@ class EquationEditingRCC extends Component {
       if (/[+=\/*-]/.test(char)) {inputMath.push(`<mo>${char}</mo>`)}
 
       if (/[\^]/.test(char)) {
-        // This Step Needs to be recursive for larger numbers.
         // This also needs to check the index +1 +2 +3 etc for powers larger than.
-        if (/[0-9]/.test(inputChars[index-1])){
-          if (/[0-9]/.test(inputChars[index-2])){
+        if (/[0-9]/.test(inputChars[index-2])){
+          const nums = [];
+          for (let i = 10; i > 1; i--){
+           if (/[0-9]/.test(inputChars[index-i])){ 
+            nums.push(inputChars[index-i]);
+           }
+          }
+          console.log(nums);
           inputMath.pop();
           inputMath.pop();
-          inputMath.push(`<msup><mi>${inputChars[index-2]}${inputChars[index-1]}</mi><mn>${inputChars[index+1]}</mn></msup>`);
-         }
-        } else {
+          inputMath.push(`<msup><mi>${nums.join('')}${inputChars[index-1]}</mi><mn>${inputChars[index+1]}</mn></msup>`);
+          } else {
           inputMath.pop();
           inputMath.push(`<msup><mi>${inputChars[index-1]}</mi><mn>${inputChars[index+1]}</mn></msup>`);
         }
@@ -120,23 +130,23 @@ class EquationEditingRCC extends Component {
     //  bracketClose: '</mrow>',
     //  power: `<msup></msup>`}
 
-    const result = [];
-    parts.forEach((part, index) => {
-      if (/\d/.test(parts[index])){
-        result.push(`<mi>${parts[index]}</mi>`)
-      }
-      if (/[+=\/*-]/.test(parts[index])){
-        result.push(`<mo>${parts[index]}</mo>`)
-      }
-      if (/[a-z]/.test(parts[index])){
-        result.push(`<mi>${parts[index]}</mi>`)
-      }
-    })
-    result.join('');
+    // const result = [];
+    // parts.forEach((part, index) => {
+    //   if (/\d/.test(parts[index])){
+    //     result.push(`<mi>${parts[index]}</mi>`)
+    //   }
+    //   if (/[+=\/*-]/.test(parts[index])){
+    //     result.push(`<mo>${parts[index]}</mo>`)
+    //   }
+    //   if (/[a-z]/.test(parts[index])){
+    //     result.push(`<mi>${parts[index]}</mi>`)
+    //   }
+    // })
+    // result.join('');
   }
 
   render() {
-    console.log(this.state)
+    // console.log(this.state)
     return (
       <>
       <form onSubmit={this.submit}>

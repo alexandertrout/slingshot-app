@@ -6,7 +6,7 @@ import awsconfig from './aws-exports';
 import { withAuthenticator } from 'aws-amplify-react';
 import './App.css';
 import Graph2 from './Components/Graph2';
-import EquationEditing from './Components/EquationEditingRCC';
+import EquationEditing from './Components/EquationEditing';
 import MachineLearning from "./Components/MachineLearning";
 import { Container, Button, FormGroup, Switch, FormControlLabel, Box, Paper, Grid } from '@material-ui/core';
 
