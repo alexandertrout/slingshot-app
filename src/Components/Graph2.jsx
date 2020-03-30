@@ -3,52 +3,39 @@ import * as d3 from 'd3';
 
 class Graph2 extends Component {
 
-  componentDidMount() {
-
-    const margin = {top: 30, right: 80, bottom: 30, left: 30};
-    const width = 700;
-    const height = 300;
-    // const svg = d3.select(this.refs.canvas)
-    // .append('svg')
-    // .style('border', '1px solid black')
-    // .attr("width", width + margin.left + margin.right)
-    // .attr("height", height + margin.top + margin.bottom)
-    // .append("g")
-    // .attr("transform", `translate(${margin.left},${margin.top})`);
-
-const nodes = [
- {name: 'A', category: '0'},
- {name: 'B', category: '0'},
- {name: 'C', category: '0'},
- {name: 'D', category: '0'},
- {name: 'E', category: '1'},
- {name: 'F', category: '1'},
- {name: 'G', category: '1'},
- {name: 'H', category: '1'}
-]
-
-const links = [
-  {source: 0, target: 1},
-  {source: 2, target: 3},
-  {source: 3, target: 1},
-  {source: 6, target: 6},
-  {source: 4, target: 2},
+  state = {
+    source: 0,
+    target: 0,
+    nodes: [
+ {name: '0', category: '0'},
+ {name: '1', category: '0'},
+ {name: '2', category: '0'},
+ {name: '3', category: '0'},
+ {name: '4', category: '1'},
+ {name: '5', category: '1'},
+ {name: '6', category: '1'},
+ {name: '7', category: '1'}
+],
+    links: [
+  {source: 0, target: 6},
   {source: 1, target: 7},
-  {source: 7, target: 4},
-  {source: 1, target: 7}
+  {source: 2, target: 5},
+  {source: 3, target: 4},
+  // {source: 1, target: 5},
+  // {source: 0, target: 5},
+  // {source: 3, target: 6},
 ]
+  }
 
-    // const link = svg.append("g")
-    //     .attr("class", "links")
-    //     .selectAll("line")
-    //     .data(links)
-    //     .enter().append("line");
+componentDidMount() {
+  this.setState({mounted: true})
+}
 
-    // const node = svg.append("g")
-    //     .attr("class", "nodes")
-    //     .selectAll("circle")
-    //     .data(nodes)
-  
+componentDidUpdate = () => {
+    const margin = {top: 30, right: 80, bottom: 30, left: 30};
+    const width = 600;
+    const height = 400;
+
   const xCenter = {
     0: (width / 1),
     1: (width / 3)
@@ -59,24 +46,20 @@ const links = [
     1: (height / 2)
   }
 
-const simulation = d3.forceSimulation(nodes)
-  .force('charge', d3.forceManyBody().strength(null))
+const simulation = d3.forceSimulation(this.state.nodes)
+  .force('charge', d3.forceManyBody().strength(0))
+  .force('collisionForce', d3.forceCollide(12).strength(1))
   .force('center', d3.forceCenter(width / 2, height / 2))
-  .force('link', d3.forceLink().links(links))
+  .force('link', d3.forceLink().links(this.state.links))
   .force('x', d3.forceX().x(function(d) {
   return xCenter[d.category];
   }).strength(1))
-  // .force('y', d3.forceY().y(function(d) {
-  // return yCenter[d.category];
-  // }))
-  .on('tick', ticked);
+  .on('tick', ticked)
 
-
-
-function updateLinks() {
+const updateLinks = () => {
   var u = d3.select('.links')
     .selectAll('line')
-    .data(links)
+    .data(this.state.links)
 
   u.enter()
     .append('line')
@@ -97,13 +80,12 @@ function updateLinks() {
   u.exit().remove()
 }
 
-function updateNodes() {
+const updateNodes = () => {
  const  u = d3.select('.nodes')
     .selectAll('text')
-    .data(nodes)
+    .data(this.state.nodes)
 
   u.enter()
-    // .append('circle')
     .append('text')
     .text(function(d) {
       return d.name
@@ -129,15 +111,44 @@ function ticked() {
 }
 
 
+onInput = (event) => {
+  const id = event.target.id;
+  const value = event.target.value;
+  console.log(event.target.id, event.target.value);
+  this.setState({[id]: value})
+};
+
+onSubmit = (event) => {
+  event.preventDefault();
+  console.log('sumbitted');
+  this.setState(currentState => {
+    const newLinks = [...currentState.links]
+    newLinks.push({source: currentState.source, target: currentState.target});
+    return {links: newLinks}
+  })
+}
+
 
   render() {
+    console.log(this.state)
     return (
         // <div ref="canvas"></div>
-    <svg width="700" height="300">
+        <div class="bigraph-container">
+    <svg width="600" height="400">
       <g class="links"></g>
       <g class="nodes"></g>
     </svg>
 
+    <div>
+    <p>Add Link</p>
+    <form action="/" onSubmit={this.onSubmit}>
+    <input type='number' id="source" placeholder= 'source' onChange={this.onInput}></input>
+    <input type='number' id="target" placeholder= 'target' onChange={this.onInput}></input>
+    <button> add link </button>
+    </form>
+    </div>
+    {/* <input type="number" onChange={this.onInput}>please input</input> */}
+      </div>
     );
   }
 }
