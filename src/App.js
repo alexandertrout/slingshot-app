@@ -59,12 +59,6 @@ function App() {
         <h1>Welcome To Your Dashboard</h1>
 
         <Grid container spacing={3}>
-          <Grid item xs={12}>
-            <Paper className={classes.paper}>
-               {/* Insert a Graph Here */}
-               <Graph2/>
-            </Paper>
-          </Grid>
           <Grid item xs={6}>
             <Paper className={classes.paper}> 
               <EquationEditing/>
@@ -72,8 +66,13 @@ function App() {
           </Grid>
           <Grid item xs={6}>
             <Paper className={classes.paper}>
-              Insert Machine Learning Here
               <MachineLearning/>
+            </Paper>
+          </Grid>
+          <Grid item xs={12}>
+            <Paper className={classes.paper}>
+              An approach to displaying a Bigraph, use a force presentation and weight each node to a certain side.
+               <Graph2/>
             </Paper>
           </Grid>
         </Grid>
