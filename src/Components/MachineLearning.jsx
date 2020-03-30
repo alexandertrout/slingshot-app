@@ -78,8 +78,9 @@ class MachineLearning extends Component {
     console.log(this.state)
     return (
       <div>
-        <h2>Train Model: </h2>
-        <button onClick={this.handleTrainModel}>Click me to train</button>
+        <h2>Machine Learning - Covid</h2>
+        <p> A model is constructed and trained using tensorflow.js <br/> It is then able to predict the number of deaths based on the number of confirmed cases.</p>
+        <button onClick={this.handleTrainModel}>Train the model</button>
 
         {this.state.isTraining && 
         <BeatLoader
@@ -92,7 +93,7 @@ class MachineLearning extends Component {
         <>
         <h2>Predict Values: </h2>
         <p>If there are x number of cases confirmed on a given day, how many deaths are there likely to be?</p>
-        <input type='number' placeholder= 'number of cases?' onChange={this.handleModelChange}></input>
+        <input type='number' placeholder= 'Number of cases' onChange={this.handleModelChange}></input>
         <button onClick={this.handlePredict}>Predict</button>
         {this.state.predictedValue && <p>{this.state.predictedValue}</p>}
         </>

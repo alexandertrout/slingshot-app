@@ -132,7 +132,9 @@ onSubmit = (event) => {
   render() {
     console.log(this.state)
     return (
-        // <div ref="canvas"></div>
+      <>
+        <h2>Bigraph Display</h2>
+       <p> An approach to displaying a Bigraph, use a force presentation and weight each node based on it set. </p>
         <div class="bigraph-container">
     <svg width="600" height="400">
       <g class="links"></g>
@@ -142,13 +144,13 @@ onSubmit = (event) => {
     <div>
     <p>Add Link</p>
     <form action="/" onSubmit={this.onSubmit}>
-    <input type='number' id="source" placeholder= 'source' onChange={this.onInput}></input>
-    <input type='number' id="target" placeholder= 'target' onChange={this.onInput}></input>
+    <input type='number' id="source" placeholder= 'Source Node' onChange={this.onInput}></input>
+    <input type='number' id="target" placeholder= 'Target Node' onChange={this.onInput}></input>
     <button> add link </button>
     </form>
     </div>
-    {/* <input type="number" onChange={this.onInput}>please input</input> */}
       </div>
+      </>
     );
   }
 }

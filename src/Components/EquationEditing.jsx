@@ -211,10 +211,10 @@ let prefix = 1;
     console.log(this.state.chartData)
     return (
       <>
+      <h2>Equation Editing and Display</h2>
+       <p> Math ML is rendered based on input and presented to the chart.js Scatter graph. <br/>Spacing is important, accepts equations in the forms;<br/>y = mx + c <br/> y = ax^n + bx + c </p>
       <form onSubmit={this.submit}>
-      <p>Spacing is important, accepts equations in the forms;<br></br> y = mx + c <br/> y = ax^n + bx + c </p>
-      {/* <p>y = mx + c</p>
-      <p>y = ax^n + bx + c</p> */}
+
        <input type="text" value={this.state.input} onChange={this.updateInput}/>
        <button>Convert</button>
      </form>
