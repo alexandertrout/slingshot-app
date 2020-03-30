@@ -6,7 +6,7 @@ import {Scatter} from 'react-chartjs-2';
 // const asciimath = '`sum_(i=1)^n i^3=((n(n+1))/2)^2`'
 const math = String.raw`
   <math xmlns="http://www.w3.org/1998/Math/MathML" display="block">
-      <mo>-</mo><mi>2</mi><mo>+</mo><mi>12</mi>
+      <mi>y</mi><mo>=</mo><msup><mi>x</mi><mn>2</mn></msup>
   </math>`
 
 class EquationEditingRCC extends Component {
@@ -35,7 +35,6 @@ class EquationEditingRCC extends Component {
       pointHoverBorderWidth: 2,
       pointRadius: 1,
       pointHitRadius: 10,
-      //Edit Data here once an equation is calculated. Must be ordered correctly for this to work. 
       data: [
          {
         x: -10,
@@ -223,7 +222,8 @@ let prefix = 1;
     <div>
     < Scatter
           data={this.state.chartData}
-          options={{maintainAspectRatio: false, showLine: true, animation: {duration: 0}, scales: {
+          options={{maintainAspectRatio: false, showLine: true, animation: {duration: 0}, legend: {
+            display: false}, scales: {
       yAxes: [{
           ticks: {
               beginAtZero:true

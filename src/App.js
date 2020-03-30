@@ -37,6 +37,13 @@ const useStyles = makeStyles(theme => ({
     margin: 0,
     height: 500,
   },
+   bigraphPaper: {
+    padding: theme.spacing(2),
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
+    margin: 0,
+    height: 400,
+  },
 }));
 
 Amplify.configure(awsconfig);
@@ -59,6 +66,12 @@ function App() {
         <h1>Welcome To Your Dashboard</h1>
 
         <Grid container spacing={3}>
+          <Grid item xs={12}>
+            <Paper className={classes.bigraphPaper}>
+              An approach to displaying a Bigraph, use a force presentation and weight each node to a certain side.
+               <Graph2/>
+            </Paper>
+          </Grid>
           <Grid item xs={6}>
             <Paper className={classes.paper}> 
               <EquationEditing/>
@@ -67,12 +80,6 @@ function App() {
           <Grid item xs={6}>
             <Paper className={classes.paper}>
               <MachineLearning/>
-            </Paper>
-          </Grid>
-          <Grid item xs={12}>
-            <Paper className={classes.paper}>
-              An approach to displaying a Bigraph, use a force presentation and weight each node to a certain side.
-               <Graph2/>
             </Paper>
           </Grid>
         </Grid>
