@@ -217,8 +217,9 @@ let prefix = 1;
 
        <input type="text" value={this.state.input} onChange={this.updateInput}/>
        <button>Convert</button>
+       <MathJax math={this.state.math}/>
      </form>
-    <MathJax math={this.state.math}/>
+    
     <div>
     < Scatter
           data={this.state.chartData}
